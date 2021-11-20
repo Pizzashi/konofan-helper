@@ -1,5 +1,14 @@
 class Click
-{  
+{
+    affinityScreen()
+    {
+        ; I don't know why I'm randomizing the click here,
+        ; probably because it feels weird if a person would be clicking at the exact same point
+        ; without buttons (avoid getting banned?)
+        Random, clkX, 0.6, 0.9
+        Random, clkY, 0.6, 0.8
+        ClickEmu(clkX*KONOFAN_W, clkY*KONOFAN_H)
+    }
     rewardsWindow()
     {
         ClickEmu(0.5*KONOFAN_W, 0.9*KONOFAN_H)
@@ -43,6 +52,7 @@ class Click
 
 ClickEmu(posX, posY)
 {
+    posX := Floor(posX), posY := Floor(posY)
     ; https://www.autohotkey.com/boards/viewtopic.php?f=7&t=33596
     ; ctrl + f: "click without moving the cursor"
 

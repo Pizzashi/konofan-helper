@@ -173,7 +173,11 @@ return
 
 ;=====================LevelFarmer subroutines=====================;
 LevelFarmer:
-    if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, LevelFarmer, Off
@@ -212,7 +216,11 @@ return
 
 ;=====================HardGrinder subroutines=====================;
 HardGrinder:
-    if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, HardGrinder, Off
@@ -287,7 +295,11 @@ return
 
 ;====================EventGrinder subroutines=====================;
 EventGrinder:
-    if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, EventGrinder, Off
