@@ -166,7 +166,7 @@ CrashTest:
     if (LevelWinCheck.onMainMenu())
     {
         SetTimer, CrashTest, Off
-        Alert("Onii-sama, the game has crashed.", false, true)
+        Alert("Onii-sama, the game has crashed.")
         DisableAll()
     }
 return
@@ -208,7 +208,7 @@ return
 ZeroMeatCheck:
     if (LevelWinCheck.zeroMeat()) ; Farming is finished
     {
-        Alert("Onii-sama, level grinding is complete.", true, false)
+        Alert("Onii-sama, level grinding is complete.")
         DisableAll()
     }
 return
@@ -259,7 +259,7 @@ AvailLevelPickerH: ; This and the subroutine below are the actions for CASE 2
 
     if (HardModeCheck.normalModeDone() && noBattlesLeft) ; Done
     {
-        Alert("Onii-sama, hard mode grinding is complete.", true, false)
+        Alert("Onii-sama, hard mode grinding is complete.")
         DisableAll()
     }
     else if (noBattlesLeft)
@@ -287,7 +287,7 @@ return
 ZeroMeatCheckH:
     if (LevelWinCheck.zeroMeat()) ; Farming is finished
     {
-        Alert("Onii-sama, we ran out of stamina.", true, false)
+        Alert("Onii-sama, we ran out of stamina.")
         DisableAll()
     }
 return
@@ -338,7 +338,7 @@ AvailLevelPickerE: ; This and the subroutine below are the actions for CASE 2
 
     if (EventModeCheck.eventModeDone() && noBattlesLeft) ; Done
     {
-        Alert("Onii-sama, event hard mode grinding is complete.", true, false)
+        Alert("Onii-sama, event hard mode grinding is complete.")
         DisableAll()
     }
     else if (noBattlesLeft)
@@ -370,7 +370,7 @@ return
 ZeroMeatCheckE:
     if (LevelWinCheck.zeroMeat()) ; Farming is finished
     {
-        Alert("Onii-sama, we ran out of stamina.", true, false)
+        Alert("Onii-sama, we ran out of stamina.")
         DisableAll()
     }
 return
