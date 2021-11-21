@@ -1,6 +1,10 @@
 ResizeEmu()
 {
     hWnd := WinExist("Fantastic Days")
+    if (hWnd = 0) {
+        Msgbox, 0, % " Konofan Helper", % "Can't find the Bluestacks window. Please make sure it is renamed to ""Fantastic Days"" (without the quotes)."
+        exit
+    }
     WinGetPosEx(hWnd,,, tempW, tempH)
 
     if (tempW = 800) {

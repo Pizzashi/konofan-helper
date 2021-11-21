@@ -19,6 +19,10 @@ RetrieveEmulatorPos()
     ; Make sure to rename the Bluestacks emulator containing Azur Lane to "Azur Lane"
     ; Using WinGetPosEx because WinGetPos (vanilla command is somewhat buggy)
     hWnd := WinExist("Fantastic Days")
+    if (hWnd = 0) {
+        Msgbox, 0, % " Konofan Helper", % "Can't find the Bluestacks window. Please make sure it is renamed to ""Fantastic Days"" (without the quotes)."
+        exit
+    }
     WinGetPosEx(hWnd, KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H)
     
     ; Bluestacks' toolbar is a flat 40 (no matter the resolution), and it's not included in ControlClick's scope
