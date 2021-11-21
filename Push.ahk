@@ -8,7 +8,7 @@ NotificationPush(pushMessage, testMode := false)
    if (testMode) {
       ; Check if AuthKey was properly set up
       if (keyApi = "INSERT_KEY_HERE" || keyApi = "") {
-         Msgbox, 0, % "Fatal Error", % "Please set the authentication key correctly."
+         Msgbox, 0, % " Konofan Helper", % "Fatal error: Please set the authentication key properly."
          ExitApp
       } else {
          return
@@ -34,7 +34,7 @@ NotificationPush(pushMessage, testMode := false)
    }
    catch errorCode
    {
-      Msgbox, 0, % "Error", % "I can't seem to reach the server to send push notifications. Please make sure the Helper can access the Internet."
+      Msgbox, 0, % " Konofan Helper", % "I can't seem to reach the server to send push notifications. Please make sure the application can access the Internet."
    }
 }
 
