@@ -1,5 +1,7 @@
 global KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H
+, GAMENOTICE_TEXT       := "|<Note>*148$36.kM0300sM0300wMC30MyMT3tyqMnX1anNlX33ntVX3zltVX3ykslX3UkMvXtqkMT3syU"
 , MAINMENU_TEXT         := "|<Play Store>*118$39.bTznzzs/zw/zzRFPiAn/efQvOq3FftPK3sgzfOrTFbZMKLzyzzzzzzjzzzw"
+, RANKUP_TEXT           := "|<Player>*128$43.zxzzzzzzwzzzzzk6TzzzztXDzzzzwwb3bCD0SHUna3UANyNmQnUAw6H0NlyM39UAtzAtknyQzW8ssLCTtUyS3bzzzyTzzzzzwDzzzzzyDzzw"
 , AFFINITY_TEXT         := "|<UP!>*138$45.1y1U0zs0DsA01z01z1U07s8DsA00T11y1Us1k8DkA7kC11y1Uy1k8DkA7kC31y1Uy1kMDkA70C31y1U03kMDkA00y71y1U0DUsDkA7zzz0w3Uzzns00Q7zs7U03Uzz0y00w7nk7s0DUwT1zsTw7XsTzzzzwTzw"
 , REWARDS_TEXT          := "|<Next>*134$38.7lzzztkwTzzyQDDzzzb1nsCQs1Aw1XC0F6CQ7b6HXbXtlkM1syQQ6Ty7b7VXz8tlww3bC0T7UNlkU"
 , REPLAY_TEXT           := "|<Replay>*159$54.00000A000zU000A000zk000A000ss000A000ssT3wATb7sMzbyADX6ttnbCA1n6zlzb7A7nazlzb7ATnitllb7Axlgstk77Atlwssz7yCxkwsQzbyCTks00D7M2DUs00070003k00070007k000200030U"
@@ -17,7 +19,7 @@ global KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H
 RetrieveEmulatorPos()
 {
     ; Make sure to rename the Bluestacks emulator containing Azur Lane to "Azur Lane"
-    ; Using WinGetPosEx because WinGetPos (vanilla command is somewhat buggy)
+    ; Using WinGetPosEx because WinGetPos (vanilla command is somewhat unreliable)
     hWnd := WinExist("Fantastic Days")
     if (hWnd = 0) {
         Msgbox, 0, % " Konofan Helper", % "Can't find the Bluestacks window. Please make sure it is renamed to ""Fantastic Days"" (without the quotes)."
@@ -32,11 +34,10 @@ RetrieveEmulatorPos()
         Msgbox, 0, % " Konofan Helper", % "Emulator seems to be out of bounds. Please make sure that it is COMPLETELY visible on the screen and recalibrate by restarting the monitoring status. " . "X: " KONOFAN_X . " Y: " KONOFAN_Y "." 
         exit
     }
-    if (KONOFAN_W != 800)
-    {
+    if (KONOFAN_W != 800) {
         Msgbox, 0, % " Konofan Helper", % "Looks like you're not using a supported resolution, hit Ctrl + F8 to fix this."
         DisableAll()
-        Exit
+        exit
     }
 }
 
@@ -75,6 +76,16 @@ class HardModeCheck
 
 class LevelWinCheck
 {
+    onNotice()
+    {
+        return ScanRegion(GAMENOTICE_TEXT, 2)
+    }
+
+    onRankUp()
+    {
+        return ScanRegion(RANKUP_TEXT, 7)
+    }
+
     onAffinityScrn()
     {
         return ScanRegion(AFFINITY_TEXT, 3)

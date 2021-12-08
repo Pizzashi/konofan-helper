@@ -50,6 +50,7 @@ UpdateTrayStatus() ; Initial tray update
 ; Ctrl + F10 = Event hard mode grinder [YELLOW BORDER]
 ; Ctrl + F9 = Resize the window to a supported resolution.
 
+; Level grinder
 ^F12::
     if (LEVEL_REPEAT) {
         LEVEL_REPEAT := 0
@@ -67,7 +68,7 @@ UpdateTrayStatus() ; Initial tray update
         Alert("Onii-sama, level grinding is now on.", true, false)
     }
 return
-
+; Hard mode grinder
 ^F11::
     if (HARD_GRIND) {
         HARD_GRIND := 0
@@ -85,7 +86,7 @@ return
         Alert("Onii-sama, hard mode grinding is now on.", true, false)
     }
 return
-
+; Event mode grinder
 ^F10::
     if (EVENT_GRIND) {
         EVENT_GRIND := 0
@@ -103,7 +104,7 @@ return
         Alert("Onii-sama, event hard mode grinding is now on.", true, false)
     }
 return
-
+; Push notifications
 ^F9::
     if (NOTIFY_EVENTS) {
         NOTIFY_EVENTS := false
@@ -113,6 +114,7 @@ return
     else {
         NOTIFY_EVENTS := true
         UpdateTrayStatus()
+        Alert("Onii-sama, please wait for a bit.", false, false)
         Alert("Onii-sama, phone notifications are now on.", true, true, false)
     }
 return
@@ -169,19 +171,29 @@ CrashTest:
         Alert("Onii-sama, the game has crashed.")
         DisableAll()
     }
+    else if (LevelWinCheck.onNotice())
+    {
+        SetTimer, CrashTest, Off
+        Alert("Onii-sama, there's a critical game notice.")
+        DisableAll()
+    }
 return
 
 ;=====================LevelFarmer subroutines=====================;
 LevelFarmer:
-    if (LevelWinCheck.onAffinityScrn())
-    {
-        Click.affinityScreen()
-    }
-    else if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, LevelFarmer, Off
         SetTimer, ReplayWinCheck, 1000
+    }
+    else if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRankUp())
+    {
+        Click.rankUpScreen()
     }
 return
 
@@ -216,15 +228,19 @@ return
 
 ;=====================HardGrinder subroutines=====================;
 HardGrinder:
-    if (LevelWinCheck.onAffinityScrn())
-    {
-        Click.affinityScreen()
-    }
-    else if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, HardGrinder, Off
         SetTimer, ReplayWinCheckH, 3500
+    }
+    else if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRankUp())
+    {
+        Click.rankUpScreen()
     }
 return
 
@@ -295,15 +311,19 @@ return
 
 ;====================EventGrinder subroutines=====================;
 EventGrinder:
-    if (LevelWinCheck.onAffinityScrn())
-    {
-        Click.affinityScreen()
-    }
-    else if (LevelWinCheck.onRewards())
+    if (LevelWinCheck.onRewards())
     {
         Click.rewardsWindow()
         SetTimer, EventGrinder, Off
         SetTimer, ReplayWinCheckE, 3500
+    }
+    else if (LevelWinCheck.onAffinityScrn())
+    {
+        Click.affinityScreen()
+    }
+    else if (LevelWinCheck.onRankUp())
+    {
+        Click.rankUpScreen()
     }
 return
 

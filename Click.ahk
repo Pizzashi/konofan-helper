@@ -9,6 +9,15 @@ class Click
         Random, clkY, 0.6, 0.8
         ClickEmu(clkX*KONOFAN_W, clkY*KONOFAN_H)
     }
+    
+    rankUpScreen()
+    {
+        ; Same reason as above - randomly click in an area without a specific button
+        Random, clkX, 0.2, 0.8
+        Random, clkY, 0.2, 0.6
+        ClickEmu(clkX*KONOFAN_W, clkY*KONOFAN_H)
+    }
+
     rewardsWindow()
     {
         ClickEmu(0.5*KONOFAN_W, 0.9*KONOFAN_H)
