@@ -1,0 +1,4 @@
+### Prerequisites
+- The Bluestacks window containing the game must be renamed to "Fantastic Days" (without the quotes), because the application will monitor the target window using its title.
+- Bluestacks' sidebar options must be collapsed or hidden from view (this can be done by clicking the arrow at the topmost right of Bluestacks).
+- Optionally, but highly recommended, there must be a Google Play Store icon at the topmost left in the home screen; along with this, a dark background for the home screen must be selected, preferably plain black (in case the game crashes, this is what the script monitors).
