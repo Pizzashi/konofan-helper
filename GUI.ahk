@@ -1,3 +1,9 @@
+Unalert()
+{
+    Global
+    Gui, Alert:Destroy
+}
+
 Alert(message, autoDestruct := false, pushNotifications := true, notifyPhoneOnly := true)
 {
     Global
@@ -15,7 +21,7 @@ Alert(message, autoDestruct := false, pushNotifications := true, notifyPhoneOnly
     Gui, Alert:New, +ToolWindow -Caption +AlwaysOnTop +HwndAlertHwnd
     Gui, Alert:Color, FFFF83
     Gui, Alert:Margin, 15, 10
-    Gui, Alert:Font, s13, Segoe UI
+    Gui, Alert:Font, s13 c00008c, Segoe UI
     Gui, Alert:Add, Picture, h40 w-1, % assistantAvatar
     Gui, Alert:Add, Text, x+10 yp+7 Center, % message
     Gui, Alert:Show, y20 x20 NoActivate
