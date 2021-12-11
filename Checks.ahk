@@ -3,6 +3,7 @@ global KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H
 , MAINMENU_TEXT         := "|<Play Store>*118$39.bTznzzs/zw/zzRFPiAn/efQvOq3FftPK3sgzfOrTFbZMKLzyzzzzzzjzzzw"
 , RANKUP_TEXT           := "|<Player>*128$43.zxzzzzzzwzzzzzk6TzzzztXDzzzzwwb3bCD0SHUna3UANyNmQnUAw6H0NlyM39UAtzAtknyQzW8ssLCTtUyS3bzzzyTzzzzzwDzzzzzyDzzw"
 , AFFINITY_TEXT         := "|<UP!>*138$45.1y1U0zs0DsA01z01z1U07s8DsA00T11y1Us1k8DkA7kC11y1Uy1k8DkA7kC31y1Uy1kMDkA70C31y1U03kMDkA00y71y1U0DUsDkA7zzz0w3Uzzns00Q7zs7U03Uzz0y00w7nk7s0DUwT1zsTw7XsTzzzzwTzw"
+, LASTPLAYEDERR_TEXT    := "|<played.>*160$49.0600000M0300000A01U000063slslXUz3yMyMrszVXA3An6Mkla7XNzMMMvDlgzgAANaMwM767QvACCFrTwAy73sTDU0030000k007U0008003U0008"
 , REWARDS_TEXT          := "|<Next>*134$38.7lzzztkwTzzyQDDzzzb1nsCQs1Aw1XC0F6CQ7b6HXbXtlkM1syQQ6Ty7b7VXz8tlww3bC0T7UNlkU"
 , REPLAY_TEXT           := "|<Replay>*159$54.00000A000zU000A000zk000A000ss000A000ssT3wATb7sMzbyADX6ttnbCA1n6zlzb7A7nazlzb7ATnitllb7Axlgstk77Atlwssz7yCxkwsQzbyCTks00D7M2DUs00070003k00070007k000200030U"
 , REPLAYCONF_TEXT       := "|<Battle>*147$48.000001U0zU0A31U0zk0A31U0kk0A31U0klyDntVwllyDXtXyzU7A31X7zkTA31XzktzA31XzkPbA31X0kvXC31X0znrDntnyzVz7lslyU"
@@ -13,6 +14,7 @@ global KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H
 , HARDZEROBATTLE_TEXT   := "|<Replay (Dark_BG)>*80$54.00000A000zU000A000zk000A000ss000A000ssT3wATb7sMzbyADX7ttnbCA1n6zlzb7A7nazlzb7ATnitlzb7Axlgttk77Atlwssz7yCxkwsQzbyCTks08D7s2DUs00070003k00070007k000200030U"
 , BATTLEPREP_TEXT       := "|<Party>*140$42.0Tzztzz0DzztzzD7zztzzDa3kM8sD6FkM8t67tntwt0D1ntwl0w1ntyHDwtntyHDwtnty3Dw1nsD7Dy1nwD7zzzzzzDzzzzzsDzzzzzsTU"
 , HASBATTLES_TEXT       := "|<Prepare (Light BG)>*143$62.UTzzzzzzzzk3zzzzzzzzwQTzzzzzzzz7b3kw3sD1sltUk70S1kM0QNwtnXyQyQ06TCQwzbDD07bU3DC1nk0Ttsznn6QwT7yTDwsnbD7lzblz4QtnswTty1k70Qz0zzzzwzzzzzzzzzzDzzzzzzzzznzzzzzU"
+, NOTBATTLEREADY_TEXT   := "|<Now Loading>*105$68.jTzzvzzzqzzlrzzyzzztjzwBnjrjllsP3l3M99vsAA6kM24mGSynnNgaklAkjjikqP9ACHA3vt9gamN3a7Ay2331ga3zzzzzzzzzzwzzzzzzzzzzsM"
 , EVNTFIN_TEXT          := "|<HARD 1>*152$58.000060A003UkC1z3z00y30w7yDy0DsA6kMMkQ1zUkP1Vn1k4zz3i66A303sAQQTkkA0DUlzlb30k0y37z6AA703sAsCMsks0DUn0NVnz00q3A1a3Dk03U"
 , EVNTQUEST_TEXT        := "|<Quest>*148$48.s3zzzzzbk1zzzzzbXszzzzzbbstnkS3UbwtnUAHU7wtn7Azbbwtn0ADbbwtn0C3bXstn7zVbXltn7zlbk1s3UA3Us7w3kA3kzDzzzzzzz1zzzzzzzVzzzzzzU"
 
@@ -68,6 +70,11 @@ class HardModeCheck
         return ScanRegion(HASBATTLES_TEXT, 9)
     }
 
+    isReadyForBattle()
+    {
+        return !(ScanRegion(NOTBATTLEREADY_TEXT, 9))
+    }
+
     zeroBattles()
     {
         return ScanRegion(HARDZEROMENU_TEXT, 9)
@@ -99,6 +106,11 @@ class LevelWinCheck
     onPreparation()
     {
         return ScanRegion(BATTLEPREP_TEXT, 1)
+    }
+
+    onLastPlayedError()
+    {
+        return ScanRegion(LASTPLAYEDERR_TEXT, 5)
     }
 
     onRewards()

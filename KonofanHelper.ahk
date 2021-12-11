@@ -45,9 +45,9 @@ global LEVEL_REPEAT := 0
 
 UpdateTrayStatus() ; Initial tray update
 
-; Ctrl + F12 = Repeat a certain level till you run out of meat (useful for farming an event stage for tickets) [RED BORDER]
-; Ctrl + F11 = Normal hard mode grinder [ORANGE BORDER]
-; Ctrl + F10 = Event hard mode grinder [YELLOW BORDER]
+; Ctrl + F12 = Repeat a certain level till you run out of meat (useful for farming an event stage for tickets) [GREEN BORDER]
+; Ctrl + F11 = Normal hard mode grinder [RED BORDER]
+; Ctrl + F10 = Event hard mode grinder [NAVY BLUE BORDER]
 ; Ctrl + F9 = Resize the window to a supported resolution.
 
 ; Level grinder
@@ -60,12 +60,12 @@ UpdateTrayStatus() ; Initial tray update
     } else {
         DisableAll()
         RetrieveEmulatorPos()
-        SetTimer, LevelFarmer, 1000
-        SetTimer, CrashTest, 5000
         LEVEL_REPEAT := 1
         UpdateTrayStatus()
         PaintWindow()
         Alert("Onii-sama, level grinding is now on.", true, false)
+        SetTimer, LevelFarmer, 1000
+        SetTimer, CrashTest, 5000
     }
 return
 ; Hard mode grinder
@@ -78,12 +78,12 @@ return
     } else {
         DisableAll()
         RetrieveEmulatorPos()
-        SetTimer, HardGrinder, 1000
-        SetTimer, CrashTest, 5000
         HARD_GRIND := 1
         UpdateTrayStatus()
         PaintWindow()
         Alert("Onii-sama, hard mode grinding is now on.", true, false)
+        SetTimer, HardGrinder, 1000
+        SetTimer, CrashTest, 5000
     }
 return
 ; Event mode grinder
@@ -96,12 +96,12 @@ return
     } else {
         DisableAll()
         RetrieveEmulatorPos()
-        SetTimer, EventGrinder, 1000
-        SetTimer, CrashTest, 5000
         EVENT_GRIND := 1
         UpdateTrayStatus()
         PaintWindow()
         Alert("Onii-sama, event hard mode grinding is now on.", true, false)
+        SetTimer, EventGrinder, 1000
+        SetTimer, CrashTest, 5000
     }
 return
 ; Push notifications
@@ -195,6 +195,11 @@ LevelFarmer:
     {
         Click.rankUpScreen()
     }
+    else if (LevelWinCheck.onLastPlayedError())
+    {
+        Alert("Onii-sama we've been logged out of the game.")
+        DisableAll()
+    }
 return
 
 ReplayWinCheck:
@@ -242,6 +247,11 @@ HardGrinder:
     {
         Click.rankUpScreen()
     }
+    else if (LevelWinCheck.onLastPlayedError())
+    {
+        Alert("Onii-sama we've been logged out of the game.")
+        DisableAll()
+    }
 return
 
 ReplayWinCheckH:
@@ -283,10 +293,17 @@ AvailLevelPickerH: ; This and the subroutine below are the actions for CASE 2
         Click.hardPrevArrow()
     }
     else if (HardModeCheck.hasBattles())
-    {
-        Sleep, 500
-        Click.battlePreparation()
+    {        
         SetTimer, AvailLevelPickerH, Off
+        SetTimer, AvailLevelClickerH, 500
+    }
+return
+
+AvailLevelClickerH: ; Let KonoFan load first before clicking "Prepare"
+    if (HardModeCheck.isReadyForBattle())
+    {
+        Click.battlePreparation()
+        SetTimer, AvailLevelClickerH, Off
         SetTimer, PreparationCheckH, 1000
     }
 return
@@ -324,6 +341,11 @@ EventGrinder:
     else if (LevelWinCheck.onRankUp())
     {
         Click.rankUpScreen()
+    }
+    else if (LevelWinCheck.onLastPlayedError())
+    {
+        Alert("Onii-sama we've been logged out of the game.")
+        DisableAll()
     }
 return
 
@@ -367,14 +389,21 @@ AvailLevelPickerE: ; This and the subroutine below are the actions for CASE 2
     }
     else if (HardModeCheck.hasBattles())
     {
-        Sleep, 500
-        Click.battlePreparation()
         SetTimer, AvailLevelPickerE, Off
-        SetTimer, PreparationCheckE, 1000
+        SetTimer, AvailLevelClickerE, 500
     }
     else if (EventModeCheck.onQuestMenu())
     {
         Click.eventHardFour()
+    }
+return
+
+AvailLevelClickerE: ; Let KonoFan load first before clicking "Prepare"
+    if (HardModeCheck.isReadyForBattle())
+    {
+        Click.battlePreparation()
+        SetTimer, AvailLevelClickerE, Off
+        SetTimer, PreparationCheckE, 1000
     }
 return
 
