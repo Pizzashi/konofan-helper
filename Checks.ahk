@@ -12,7 +12,7 @@ global KONOFAN_X, KONOFAN_Y, KONOFAN_W, KONOFAN_H
 , FALSEHARDFIN_TEXT     := "|<Ch. 1-4>*153$54.00k0000001kk000000Dwk00700CCMk00D00SQ0y00T00ys0zU0H01ys0nU0301is0lU037nCs0lU033rzM0lU0307zQ0lX0300CDwlb0300C7slX03006U"
 , HARDZEROMENU_TEXT     := "|</3>*51$17.zDzwTzsUTn0T7wyDtwzntw7XsDDyATwMzsns17k6DkwzzlzzbzzU"
 , HARDZEROBATTLE_TEXT   := "|<Replay (Dark_BG)>*80$54.00000A000zU000A000zk000A000ss000A000ssT3wATb7sMzbyADX7ttnbCA1n6zlzb7A7nazlzb7ATnitlzb7Axlgttk77Atlwssz7yCxkwsQzbyCTks08D7s2DUs00070003k00070007k000200030U"
-, BATTLEPREP_TEXT       := "|<Party>*140$42.0Tzztzz0DzztzzD7zztzzDa3kM8sD6FkM8t67tntwt0D1ntwl0w1ntyHDwtntyHDwtnty3Dw1nsD7Dy1nwD7zzzzzzDzzzzzsDzzzzzsTU"
+, BATTLEPREP_TEXT       := "|<Begin>*135$44.zzzzzrzsDzzzszw0zzzzDz77zzzzzltwTkRsAQQ3k6A10CCMtX601baSMlkQM1baAQ7W0NtX71sXyCMlkQQzk6AQ0D0S1X78DwDyRvnzzzz7zzzzzw3zzzzzz1zzy"
 , HASBATTLES_TEXT       := "|<Prepare (Light BG)>*143$62.UTzzzzzzzzk3zzzzzzzzwQTzzzzzzzz7b3kw3sD1sltUk70S1kM0QNwtnXyQyQ06TCQwzbDD07bU3DC1nk0Ttsznn6QwT7yTDwsnbD7lzblz4QtnswTty1k70Qz0zzzzwzzzzzzzzzzDzzzzzzzzznzzzzzU"
 , NOTBATTLEREADY_TEXT   := "|<Now Loading>*105$68.jTzzvzzzqzzlrzzyzzztjzwBnjrjllsP3l3M99vsAA6kM24mGSynnNgaklAkjjikqP9ACHA3vt9gamN3a7Ay2331ga3zzzzzzzzzzwzzzzzzzzzzsM"
 , EVNTFIN_TEXT          := "|<HARD 1>*152$58.000060A003UkC1z3z00y30w7yDy0DsA6kMMkQ1zUkP1Vn1k4zz3i66A303sAQQTkkA0DUlzlb30k0y37z6AA703sAsCMsks0DUn0NVnz00q3A1a3Dk03U"
@@ -105,7 +105,7 @@ class LevelWinCheck
 
     onPreparation()
     {
-        return ScanRegion(BATTLEPREP_TEXT, 1)
+        return ScanRegion(BATTLEPREP_TEXT, 9)
     }
 
     onLastPlayedError()
